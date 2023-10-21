@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import axios from 'axios';
 
-
 const TableComponent = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -91,15 +90,30 @@ const TableComponent = () => {
         }
     };
 
+    const handleClearData = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://127.0.0.1:8000/api/table/efotermstable');
+            setData(response.data.results);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+    };
+
     return (
-        <Table
-            columns={columns}
-            dataSource={data}
-            loading={loading}
-            rowKey="id"
-        />
+        <div>
+            <div style={{ marginBottom: '10px', textAlign: 'right' }}>
+                <button onClick={handleClearData}>Clear Data</button>
+            </div>
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                rowKey="id"
+            />
+        </div>
     );
 };
 
 export default TableComponent;
-
