@@ -104,7 +104,9 @@ const TableComponent = () => {
     return (
         <div>
             <div style={{ marginBottom: '10px', textAlign: 'right' }}>
-                <button onClick={handleClearData}>Clear Data</button>
+                <button className="clear-button" onClick={handleClearData}>
+                    Clear Data
+                </button>
             </div>
             <Table
                 columns={columns}
