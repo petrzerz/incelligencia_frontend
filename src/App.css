@@ -71,3 +71,12 @@ a:hover {
   margin-bottom: 10px;
   text-align: right;
 }
+
+.table-title {
+  text-align: center;
+  font-size: 36px; 
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1890ff; 
+}
+

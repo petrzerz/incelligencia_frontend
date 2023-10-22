@@ -104,6 +104,7 @@ const TableComponent = () => {
             setLoading(true);
             const response = await axios.get('http://127.0.0.1:8000/api/table/efotermstable');
             setData(response.data.results);
+            setRootTermMessage(null);
             setLoading(false);
         } catch (error) {
             console.error("Error fetching data: ", error);
@@ -112,6 +113,7 @@ const TableComponent = () => {
 
     return (
         <div>
+            <div className="table-title">OLS Lookup Service</div>
             <div className="button-container">
                 <button className="clear-button" onClick={handleClearData}>
                     Clear Data
@@ -123,10 +125,12 @@ const TableComponent = () => {
                 loading={loading}
                 rowKey="id"
             />
-            {rootTermMessage && (
-                <div className="root-term-message">{rootTermMessage}</div>
-            )}
-        </div>
+            {
+                rootTermMessage && (
+                    <div className="root-term-message">{rootTermMessage}</div>
+                )
+            }
+        </div >
     );
 };
 export default TableComponent;
