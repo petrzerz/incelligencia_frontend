@@ -71,7 +71,7 @@ const TableComponent = () => {
             dataIndex: 'parents',
             key: 'parents',
             render: (text, record) => (
-                <a onClick={() => handleParentClick(record.id)}>View Parents</a>
+                <a onClick={() => handleParentClick(record.term_id)}>View Parents</a>
             ),
         },
         {
@@ -79,7 +79,7 @@ const TableComponent = () => {
             dataIndex: 'children',
             key: 'children',
             render: (text, record) => (
-                <a onClick={() => handleChildrenClick(record.id)}>View Children</a>
+                <a onClick={() => handleChildrenClick(record.term_id)}>View Children</a>
             ),
         },
     ];
