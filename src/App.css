@@ -8,26 +8,26 @@
 }
 
 .table-wrapper {
-  width: 60%; /* Adjust the width as needed */
+  width: 60%; 
   margin-top: 50px;
 }
 
 .ant-table {
   width: 100%;
-  border-radius: 10px; /* Adjust the border radius as needed */
-  overflow: hidden; /* Ensure the border radius is applied properly */
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 .ant-table-thead > tr > th {
   background-color: #f5f5f5;
   text-align: left;
   font-weight: bold;
-  border: 1px solid #e8e8e8; /* Adjust the border style as needed */
+  border: 1px solid #e8e8e8; 
 }
 
 .ant-table-tbody > tr > td {
   text-align: left;
-  border: 1px solid #e8e8e8; /* Adjust the border style as needed */
+  border: 1px solid #e8e8e8; 
 }
 
 .ant-table-tbody > tr:hover > td {
@@ -60,4 +60,14 @@ a:hover {
 .root-term-message {
   margin-top: 10px;
   text-align: center;
+  color: #ff4d4f;
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.button-container {
+  margin-bottom: 10px;
+  text-align: right;
 }

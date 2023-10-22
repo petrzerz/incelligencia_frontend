@@ -112,7 +112,7 @@ const TableComponent = () => {
 
     return (
         <div>
-            <div style={{ marginBottom: '10px', textAlign: 'right' }}>
+            <div className="button-container">
                 <button className="clear-button" onClick={handleClearData}>
                     Clear Data
                 </button>
