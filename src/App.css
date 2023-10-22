@@ -56,3 +56,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.root-term-message {
+  margin-top: 10px;
+  text-align: center;
+}

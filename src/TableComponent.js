@@ -6,6 +6,8 @@ import axios from 'axios';
 const TableComponent = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [rootTermMessage, setRootTermMessage] = useState(null);
+
 
     const fetchData = async () => {
         try {
@@ -72,8 +74,15 @@ const TableComponent = () => {
         try {
             setLoading(true);
             const response = await axios.get(`http://127.0.0.1:8000/api/table/efotermstable/${id}/parents`);
-            setData(response.data.results);
-            setLoading(false);
+            if (response.data.results.length === 0) {
+                setData([]);
+                setRootTermMessage("This is a root term, no parents available. Click the clear button.");
+                setLoading(false);
+            } else {
+                setData(response.data.results);
+                setRootTermMessage(null);
+                setLoading(false);
+            }
         } catch (error) {
             console.error("Error fetching data: ", error);
         }
@@ -114,8 +123,10 @@ const TableComponent = () => {
                 loading={loading}
                 rowKey="id"
             />
+            {rootTermMessage && (
+                <div className="root-term-message">{rootTermMessage}</div>
+            )}
         </div>
     );
 };
-
 export default TableComponent;
