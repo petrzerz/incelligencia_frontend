@@ -7,13 +7,21 @@ const TableComponent = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [rootTermMessage, setRootTermMessage] = useState(null);
+    const [nextPage, setNextPage] = useState(null);
 
 
-    const fetchData = async () => {
+
+    const fetchData = async (url) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/table/efotermstable');
-            console.log(response.data.results);
-            setData(response.data.results);
+            setLoading(true);
+            const response = await axios.get(url || 'http://127.0.0.1:8000/api/table/efotermstable');
+            if (url) {
+                setData(prevData => [...prevData, ...response.data.results]);
+            } else {
+                setData(response.data.results);
+            }
+            setNextPage(response.data.next);
+            setLoading(false);
         } catch (error) {
             console.error("Error fetching data: ", error);
         }
@@ -22,6 +30,12 @@ const TableComponent = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleLoadMore = () => {
+        if (nextPage) {
+            fetchData(nextPage);
+        }
+    };
 
     const columns = [
         {
@@ -128,6 +142,15 @@ const TableComponent = () => {
             {
                 rootTermMessage && (
                     <div className="root-term-message">{rootTermMessage}</div>
+                )
+            }
+            {
+                nextPage && (
+                    <div className="load-more-container">
+                        <button className="load-more-button" onClick={handleLoadMore}>
+                            Load More Data
+                        </button>
+                    </div>
                 )
             }
         </div >
