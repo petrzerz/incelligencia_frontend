@@ -7,6 +7,7 @@ const TableComponent = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [rootTermMessage, setRootTermMessage] = useState(null);
+    const [noChildrenMessage, setNoChildrenMessage] = useState(null);
     const [nextPage, setNextPage] = useState(null);
 
 
@@ -106,8 +107,16 @@ const TableComponent = () => {
         try {
             setLoading(true);
             const response = await axios.get(`http://127.0.0.1:8000/api/table/efotermstable/${id}/children`);
-            setData(response.data.results);
-            setLoading(false);
+            if (response.data.results.length === 0) {
+                setData([]);
+                setNoChildrenMessage('No children terms for this term. Click the clear button')
+                setLoading(false);
+            }
+            else {
+                setData(response.data.results);
+                setNoChildrenMessage(null)
+                setLoading(false);
+            }
         } catch (error) {
             console.error("Error fetching data: ", error);
         }
@@ -119,6 +128,7 @@ const TableComponent = () => {
             const response = await axios.get('http://127.0.0.1:8000/api/table/efotermstable');
             setData(response.data.results);
             setRootTermMessage(null);
+            setNoChildrenMessage(null);
             setLoading(false);
         } catch (error) {
             console.error("Error fetching data: ", error);
@@ -142,6 +152,11 @@ const TableComponent = () => {
             {
                 rootTermMessage && (
                     <div className="root-term-message">{rootTermMessage}</div>
+                )
+            }
+            {
+                noChildrenMessage && (
+                    <div className="root-term-message">{noChildrenMessage}</div>
                 )
             }
             {
