@@ -31,3 +31,4 @@ The table in this application displays data fetched from a paginated API endpoin
 - The "Clear Data" button clears the currently displayed data and resets the table to its initial state.
 - The "Load More" button fetches the next set of paginated api data and appends it to the current table data.
 - If a term has no parents, the message "This is a root term, no parents available. Click the clear button." is displayed.
+- If a term has no children, the message "No children terms for this term. Click the clear button" is displayed.
